@@ -1,0 +1,593 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TubeAds Skill Lite Plan v1",
+  "type": "object",
+  "properties": {
+    "contract_name": {
+      "type": "string",
+      "const": "tubeads.plan"
+    },
+    "contract_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "producer": {
+      "type": "object",
+      "properties": {
+        "skill_id": {
+          "type": "string",
+          "const": "tubeads-skill-lite"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "edition": {
+          "type": "string",
+          "const": "lite"
+        }
+      },
+      "required": [
+        "skill_id",
+        "version",
+        "edition"
+      ],
+      "additionalProperties": false
+    },
+    "plan_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^local-[a-zA-Z0-9_-]+$"
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "platform": {
+      "type": "string",
+      "const": "google_ads"
+    },
+    "scope": {
+      "type": "string",
+      "const": "youtube_video_planning"
+    },
+    "status": {
+      "type": "string",
+      "const": "PLAN_READY"
+    },
+    "publish_authorized": {
+      "type": "boolean",
+      "const": false
+    },
+    "external_reads": {
+      "type": "boolean",
+      "const": false
+    },
+    "external_writes": {
+      "type": "boolean",
+      "const": false
+    },
+    "review_status": {
+      "type": "string",
+      "const": "HUMAN_REVIEW_REQUIRED"
+    },
+    "generation_mode": {
+      "type": "string",
+      "enum": [
+        "deterministic_starter",
+        "agent_assisted"
+      ]
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "offer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "audience": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "market": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "goal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "awareness",
+            "traffic",
+            "leads",
+            "sales",
+            null
+          ]
+        },
+        "success_action": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "landing_page_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "landing_page_text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 20000
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 3,
+          "pattern": "^[A-Z]{3}$"
+        },
+        "total_budget": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "duration_days": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 366
+        },
+        "video_duration_seconds": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 6,
+          "maximum": 300
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40,
+                "pattern": "^F[0-9]+$"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "minItems": 0,
+          "maxItems": 30
+        },
+        "data_label": {
+          "type": "string",
+          "enum": [
+            "user_supplied",
+            "synthetic"
+          ]
+        }
+      },
+      "required": [
+        "brand",
+        "offer",
+        "audience",
+        "market",
+        "goal",
+        "success_action",
+        "landing_page_url",
+        "landing_page_text",
+        "currency",
+        "total_budget",
+        "duration_days",
+        "video_duration_seconds",
+        "facts",
+        "constraints",
+        "data_label"
+      ],
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 3,
+          "pattern": "^[A-Z]{3}$"
+        },
+        "total_limit": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "duration_days": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 366
+        },
+        "daily_average": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        }
+      },
+      "required": [
+        "currency",
+        "total_limit",
+        "duration_days",
+        "daily_average",
+        "note"
+      ],
+      "additionalProperties": false
+    },
+    "deliverables": {
+      "type": "object",
+      "properties": {
+        "duration_seconds": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 300
+        },
+        "duration_source": {
+          "type": "string",
+          "enum": [
+            "user_supplied",
+            "starter_assumption"
+          ]
+        },
+        "hook_variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "pattern": "^local-[a-zA-Z0-9_-]+$"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "id",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2,
+          "maxItems": 10
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 300
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 300
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "hook",
+                  "explanation",
+                  "consideration",
+                  "cta"
+                ]
+              },
+              "voiceover": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000
+              },
+              "visual": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40,
+                  "pattern": "^F[0-9]+$"
+                },
+                "minItems": 0,
+                "maxItems": 30
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "role",
+              "voiceover",
+              "visual",
+              "evidence_ids"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2,
+          "maxItems": 20
+        },
+        "shot_list": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "cta": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "test_plan": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "pattern": "^local-[a-zA-Z0-9_-]+$"
+              },
+              "variable": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "variants": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "minItems": 2,
+                "maxItems": 10
+              },
+              "hold_constant": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "minItems": 1,
+                "maxItems": 20
+              },
+              "decision_rule": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000
+              },
+              "budget_allocation": {
+                "type": "null",
+                "const": null
+              }
+            },
+            "required": [
+              "id",
+              "variable",
+              "variants",
+              "hold_constant",
+              "decision_rule",
+              "budget_allocation"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "review_notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "campaign_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        }
+      },
+      "required": [
+        "duration_seconds",
+        "duration_source",
+        "hook_variants",
+        "segments",
+        "shot_list",
+        "cta",
+        "test_plan",
+        "review_notes",
+        "campaign_note"
+      ],
+      "additionalProperties": false
+    },
+    "measurement": {
+      "type": "object",
+      "properties": {
+        "success_action": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "tracking_status": {
+          "type": "string",
+          "const": "NOT_VERIFIED"
+        },
+        "baseline": {
+          "type": "null",
+          "const": null
+        },
+        "target": {
+          "type": "null",
+          "const": null
+        },
+        "attribution_window": {
+          "type": "null",
+          "const": null
+        }
+      },
+      "required": [
+        "success_action",
+        "tracking_status",
+        "baseline",
+        "target",
+        "attribution_window"
+      ],
+      "additionalProperties": false
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      },
+      "minItems": 1,
+      "maxItems": 30
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    "validation_scope": {
+      "type": "string",
+      "const": "local_structure_only"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "producer",
+    "plan_id",
+    "created_at",
+    "platform",
+    "scope",
+    "status",
+    "publish_authorized",
+    "external_reads",
+    "external_writes",
+    "review_status",
+    "generation_mode",
+    "input",
+    "budget",
+    "deliverables",
+    "measurement",
+    "assumptions",
+    "open_questions",
+    "validation_scope"
+  ],
+  "additionalProperties": false
+}

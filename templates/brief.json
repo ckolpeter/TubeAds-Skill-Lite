@@ -1,0 +1,17 @@
+{
+  "brand": null,
+  "offer": null,
+  "audience": null,
+  "market": null,
+  "goal": null,
+  "success_action": null,
+  "landing_page_url": null,
+  "landing_page_text": null,
+  "currency": null,
+  "total_budget": null,
+  "duration_days": null,
+  "video_duration_seconds": null,
+  "facts": [],
+  "constraints": [],
+  "data_label": "user_supplied"
+}

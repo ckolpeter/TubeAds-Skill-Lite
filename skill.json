@@ -1,0 +1,16 @@
+{
+  "id": "tubeads-skill-lite",
+  "title": "TubeAds Skill Lite",
+  "version": "1.0.0",
+  "edition": "lite",
+  "platform": "google_ads",
+  "scope": "youtube_video_planning",
+  "contract_name": "tubeads.plan",
+  "contract_version": "1.0",
+  "utm_source": "youtube",
+  "utm_medium": "paid_video",
+  "runtime_network": false,
+  "external_reads": false,
+  "external_writes": false,
+  "release_date": "2026-10-05"
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "agent-skills-format",
+    "title": "Agent Skills specification",
+    "url": "https://agentskills.io/specification",
+    "reviewed_on": "2026-10-05",
+    "status": "read",
+    "used_for": "SKILL.md frontmatter and directory naming"
+  },
+  {
+    "id": "codex-skills",
+    "title": "OpenAI Build skills",
+    "url": "https://developers.openai.com/codex/skills/",
+    "reviewed_on": "2026-10-05",
+    "status": "read",
+    "used_for": ".agents/skills authoring paths; no Desktop acceptance test performed"
+  },
+  {
+    "id": "claude-code-skills",
+    "title": "Claude Code skills",
+    "url": "https://code.claude.com/docs/en/skills",
+    "reviewed_on": "2026-10-05",
+    "status": "read",
+    "used_for": ".claude/skills authoring paths; not a claim about Cowork/cloud loading"
+  },
+  {
+    "id": "google-video",
+    "title": "Create a Video campaign",
+    "url": "https://support.google.com/google-ads/answer/2375497?hl=en",
+    "reviewed_on": "2026-10-05",
+    "status": "read",
+    "used_for": "YouTube video planning is under Google Ads; do not hardcode live campaign support"
+  }
+]

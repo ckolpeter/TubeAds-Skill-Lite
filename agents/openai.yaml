@@ -1,0 +1,4 @@
+interface:
+  display_name: "TubeAds Skill Lite"
+  short_description: "YouTube 影片廣告離線規劃與素材起稿"
+  default_prompt: "Use $tubeads-skill-lite to turn my supplied brief into an offline plan, explain assumptions, and validate local outputs."

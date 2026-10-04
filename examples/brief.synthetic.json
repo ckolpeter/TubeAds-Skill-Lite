@@ -1,0 +1,26 @@
+{
+  "brand": "範例學院",
+  "offer": "廣告入門課程",
+  "audience": "想練習廣告規劃的初學者",
+  "market": "台灣",
+  "goal": "leads",
+  "success_action": "提交課程諮詢表單",
+  "landing_page_url": "https://example.com/course",
+  "landing_page_text": "合成範例：頁面介紹課程內容，設有課程諮詢表單。未提供價格、保證、開課日或真實成效。",
+  "currency": "TWD",
+  "total_budget": 6000,
+  "duration_days": 14,
+  "video_duration_seconds": 30,
+  "facts": [
+    {
+      "id": "F1",
+      "text": "課程內容包含廣告規劃練習。",
+      "source": "合成教學範例，不是 AI Ads Academy 的真實課程承諾。"
+    }
+  ],
+  "constraints": [
+    "不得宣稱保證收益。",
+    "未提供價格，不得補寫優惠。"
+  ],
+  "data_label": "synthetic"
+}

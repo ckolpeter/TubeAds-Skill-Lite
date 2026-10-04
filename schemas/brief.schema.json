@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TubeAds Skill Lite Brief v1",
+  "type": "object",
+  "properties": {
+    "brand": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "offer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "audience": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "market": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "goal": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "awareness",
+        "traffic",
+        "leads",
+        "sales",
+        null
+      ]
+    },
+    "success_action": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "landing_page_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "landing_page_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 20000
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 3,
+      "pattern": "^[A-Z]{3}$"
+    },
+    "total_budget": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "duration_days": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 366
+    },
+    "video_duration_seconds": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 6,
+      "maximum": 300
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": "^F[0-9]+$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 30
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      },
+      "minItems": 0,
+      "maxItems": 30
+    },
+    "data_label": {
+      "type": "string",
+      "enum": [
+        "user_supplied",
+        "synthetic"
+      ]
+    }
+  },
+  "required": [
+    "offer"
+  ],
+  "additionalProperties": false
+}

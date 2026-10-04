@@ -1,0 +1,8 @@
+{
+  "valid": true,
+  "validation_scope": "local_structure_only",
+  "warnings": [
+    "尚未驗證模型路由、廣告審核、素材授權或實際投放成效。",
+    "通過僅表示本地結構檢查；商品真實性與廣告策略須人工審查。"
+  ]
+}
