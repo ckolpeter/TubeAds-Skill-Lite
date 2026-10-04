@@ -36,7 +36,7 @@ def structural_errors(root: Path = ROOT) -> list[str]:
             errors.append("SKILL.md frontmatter missing")
         name = re.search(r"^name: (.+)$", skill, re.M)
         desc = re.search(r"^description: (.+)$", skill, re.M)
-        if not name or name.group(1) != root.name or name.group(1) != cfg["id"]:
+        if not name or name.group(1) != cfg["id"] or name.group(1).casefold() != root.name.casefold():
             errors.append("Skill ID must match directory and metadata")
         if not desc or not 1 <= len(desc.group(1)) <= 1024:
             errors.append("Skill description length invalid")
