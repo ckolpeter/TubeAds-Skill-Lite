@@ -17,6 +17,54 @@ metadata:
 YouTube 影片廣告：三種開場、分鏡、口播、拍攝清單與單一變因測試。本 Skill 是可編修的離線企劃工作流，不是自動投放程式。
 預設使用繁體中文。處理其他語言時沿用使用者語言。
 
+## Reference map
+
+只在當前任務需要時開啟 reference；所有執行時 Markdown reference 都必須直接由本檔可達，不依賴第二層 reference。
+
+- 平台工作流：[references/workflow.md](references/workflow.md)
+- 資料契約與驗證範圍：[references/data-contract.md](references/data-contract.md)
+- 官方來源與核對狀態：[references/official-sources.md](references/official-sources.md)
+- 機器可讀來源快照：[references/official-sources.json](references/official-sources.json)
+
+若任何 Markdown reference 超過 100 行，頂部必須提供 `## Contents`（或等效目錄標題）；release gate 會阻擋不符合者。
+
+## Degrees of freedom
+
+**High freedom — 模型可判斷**
+- 依使用者已提供事實形成策略、創意、訊息與測試假設。
+- 說明取捨與待確認問題；不得發明平台能力、價格、搜尋量、成效或授權。
+
+**Medium freedom — 固定輸出形狀、內容可變**
+- 依 brief/schema 組織本平台 deliverables。
+- 維持 facts、assumptions、unknowns、risks、recommendations 分離。
+- 改寫 deterministic starter 時保留 contract 與安全欄位。
+
+**Low freedom — 必須用 script**
+- JSON schema/semantic validation、copy 長度檢查、UTM、render、no-overwrite 與 release gate。
+- 不用模型心算或自由改寫取代 deterministic 檢查，也不得弱化 validator 來讓結果通過。
+
+## Ordered execution checklist
+
+- [ ] 確認請求屬於本 Skill 範圍；相鄰平台任務要 route away。
+- [ ] 沿用已提供資訊，只收集阻塞性缺漏；未知保持 null／空集合。
+- [ ] 只開啟 Reference map 中必要的 reference。
+- [ ] 用模板建立本地 brief，產生 deterministic starter。
+- [ ] 依平台工作流做高／中 freedom 的內容完善。
+- [ ] 執行 validate／必要的 copy check；失敗就修正並重驗。
+- [ ] 通過後再 render/交付；若無法修復，清楚回報 blocker。
+
+## Self-correction loop
+
+本地 artifact 採 **draft → validate → repair → revalidate**。驗證失敗時回到失敗步驟；不得略過、不得弱化 validator、不得把 failed artifact 標為 `PLAN_READY`。
+
+高 freedom prose 在交付前，對照 supplied facts、相關 reference、平台範圍與 unsupported-claim 風險自查；發現未支持主張就先修訂。
+
+## Dependencies
+
+必要條件只有 Python 3.10+ 與標準函式庫。無需 pip、npm、Docker、API key、廣告帳號登入、connector、網路或其他 Skill Repo。
+
+若缺少 Python 3.10+，停止並回報 prerequisite，不自行安裝。宿主 AI 可用於文字生成，但不是本 package 的 runtime dependency。
+
 ## 啟用前先確認範圍
 
 Plan offline YouTube ad hooks, voiceover scripts, storyboards and single-variable creative tests. Use for YouTube 影片廣告企劃. Do not use for Google Search keywords, TikTok scripts, video generation, live accounts or publishing.
@@ -69,4 +117,4 @@ python3 scripts/toolkit.py utm 'https://example.com/course' --campaign demo --co
 
 ## 驗證與開發
 
-開發請讀 `AGENTS.md` 與 `docs/HANDOFF.md`。手動 Skill 路由情境見 `evals/manual-cases.md`；本發行包不聲稱已在桌面端逐一驗證。
+開發請讀 `AGENTS.md` 與 `docs/HANDOFF.md`。手動 Skill 路由情境見 `evals/manual-cases.md`；結構稽核見 `docs/BEST_PRACTICES_AUDIT.md`，跨模型矩陣見 `evals/MODEL_EVAL_MATRIX.md`。本發行包不聲稱未實測的桌面／模型行為已通過。

@@ -19,6 +19,15 @@ REQUIRED = ["SKILL.md", "README.md", "AGENTS.md", "CLAUDE.md", "LICENSE", "skill
             "evals/manual-cases.md", "tests/test_toolkit.py"]
 
 
+CONTENTS_RE = re.compile(r"^##\\s+(contents|table of contents|目錄|目录)\\s*$", re.I | re.M)
+REQUIRED_SKILL_SECTIONS = (
+    "## Reference map",
+    "## Degrees of freedom",
+    "## Ordered execution checklist",
+    "## Self-correction loop",
+    "## Dependencies",
+)
+
 def inventory(root: Path = ROOT) -> list[Path]:
     return sorted(p for p in root.rglob("*") if p.is_file() and not any(part in IGNORE_PARTS for part in p.relative_to(root).parts)
                   and p.name not in {"MANIFEST.sha256", ".DS_Store"} and p.suffix != ".pyc")
@@ -32,6 +41,26 @@ def structural_errors(root: Path = ROOT) -> list[str]:
     try:
         cfg = json.loads((root / "skill.json").read_text(encoding="utf-8"))
         skill = (root / "SKILL.md").read_text(encoding="utf-8")
+        if len(skill.splitlines()) > 500:
+            errors.append("SKILL.md exceeds 500 lines")
+        for heading in REQUIRED_SKILL_SECTIONS:
+            if heading not in skill:
+                errors.append("Missing best-practice section: " + heading)
+        ref_root = root / "references"
+        for ref in sorted(ref_root.rglob("*.md")):
+            if ref.parent != ref_root:
+                errors.append("Nested reference path forbidden: " + ref.relative_to(root).as_posix())
+                continue
+            rel_ref = ref.relative_to(root).as_posix()
+            if rel_ref not in skill:
+                errors.append("Reference not linked directly from SKILL.md: " + rel_ref)
+            ref_lines = ref.read_text(encoding="utf-8").splitlines()
+            if len(ref_lines) > 100 and not CONTENTS_RE.search("\n".join(ref_lines[:40])):
+                errors.append("Reference over 100 lines lacks top content list: " + rel_ref)
+        if not (root / "docs" / "BEST_PRACTICES_AUDIT.md").is_file():
+            errors.append("Missing best-practices audit")
+        if not (root / "evals" / "MODEL_EVAL_MATRIX.md").is_file():
+            errors.append("Missing model-eval matrix")
         if not skill.startswith("---\n"):
             errors.append("SKILL.md frontmatter missing")
         name = re.search(r"^name: (.+)$", skill, re.M)

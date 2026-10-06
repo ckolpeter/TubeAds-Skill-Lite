@@ -19,3 +19,11 @@
 
 每個案例記錄：日期、工具、模型、輸入、輸出路徑、PASS／FAIL／NOT_RUN、問題與修正。
 不要把模型產出品質或路由成功率，從 Python 測試結果推導出來。
+
+## v1.1 hardening probes
+
+- Reference loading：記錄實際開啟的 reference；問題只需要一份 reference 時，不應無差別載入全部。
+- Validation failure：故意製造 failed artifact，必須修正後重驗，不得弱化 validator 或繼續當作 PASS。
+- Freedom calibration：策略／創意允許模型判斷；schema、copy limit、validation 等低自由度工作必須由 script 決定。
+
+跨模型 lanes 與記錄格式見 [MODEL_EVAL_MATRIX.md](MODEL_EVAL_MATRIX.md)。
